@@ -1,0 +1,16 @@
+Analyzing sms_forwarder_android...                              
+
+   info - Parameter 'key' could be a super parameter - lib\main.dart:17:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter - lib\screens\home_screen.dart:8:9 - use_super_parameters
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\home_screen.dart:79:50 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\home_screen.dart:79:80 - deprecated_member_use
+   info - Parameter 'key' could be a super parameter - lib\screens\onboarding_screen.dart:8:9 - use_super_parameters
+   info - Missing type annotation - lib\services\sms_service.dart:10:1 - strict_top_level_inference
+warning - The value of the local variable 'response' isn't used - lib\services\sms_service.dart:18:13 - unused_local_variable
+warning - The value of the local variable 'logData' isn't used - lib\services\sms_service.dart:31:14 - unused_local_variable
+warning - The value of the local variable 'logData' isn't used - lib\services\sms_service.dart:38:14 - unused_local_variable
+warning - The value of the local variable 'response' isn't used - lib\services\sms_service.dart:55:15 - unused_local_variable
+   info - 'background' is deprecated and shouldn't be used. Use surface instead. This feature was deprecated after v3.18.0-0.1.pre - lib\utils\constants.dart:23:11 - deprecated_member_use
+  error - The argument type 'CardTheme' can't be assigned to the parameter type 'CardThemeData?'.  - lib\utils\constants.dart:25:20 - argument_type_not_assignable
+
+12 issues found. (ran in 1.4s)

@@ -1,0 +1,5 @@
+package com.muhammetdag.sms_forwarder_android
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity : FlutterActivity()
