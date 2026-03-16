@@ -36,28 +36,40 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     }
   }
 
+  void _previousPage() {
+    if (_currentPage > 0) {
+      _pageController.previousPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
   Widget _buildLanguageSelection() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Icon(Icons.language, size: 80, color: AppColors.primary),
-        const SizedBox(height: 32),
-        Text(
-          Translations.get('languageSelection', _selectedLang),
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 32),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _langButton('tr', 'Türkçe'),
-            const SizedBox(width: 16),
-            _langButton('en', 'English'),
-          ],
-        ),
-        const Spacer(),
-        _bottomButton(),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      child: Column(
+        children: [
+          const Spacer(),
+          const Icon(Icons.language, size: 80, color: AppColors.primary),
+          const SizedBox(height: 32),
+          Text(
+            Translations.get('languageSelection', _selectedLang),
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 32),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(child: _langButton('tr', 'Türkçe')),
+              const SizedBox(width: 16),
+              Expanded(child: _langButton('en', 'English')),
+            ],
+          ),
+          const Spacer(),
+          _bottomButton(),
+        ],
+      ),
     );
   }
 
@@ -70,13 +82,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         });
         PrefService.setLanguage(code);
       },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        alignment: Alignment.center,
+        padding: const EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.primary : AppColors.surface,
           borderRadius: BorderRadius.circular(AppConstants.borderRadius),
+          boxShadow: isSelected ? [
+            BoxShadow(
+              color: AppColors.primary.withAlpha(100),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            )
+          ] : [],
           border: Border.all(
-            color: isSelected ? AppColors.primary : Colors.transparent,
+            color: isSelected ? AppColors.primary : Colors.white10,
           ),
         ),
         child: Text(
@@ -92,10 +113,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Widget _buildStep(String titleKey, String descKey, IconData icon) {
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const Spacer(),
           Icon(icon, size: 100, color: AppColors.primary),
           const SizedBox(height: 48),
           Text(
@@ -118,18 +139,33 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Widget _bottomButton() {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 32.0),
-      child: SizedBox(
-        width: double.infinity,
-        child: ElevatedButton(
-          onPressed: _nextPage,
-          child: Text(
-            _currentPage == 3 
-              ? Translations.get('finish', _selectedLang) 
-              : Translations.get('next', _selectedLang),
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      padding: const EdgeInsets.only(bottom: 48.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: _nextPage,
+              child: Text(
+                _currentPage == 3 
+                  ? Translations.get('finish', _selectedLang) 
+                  : Translations.get('next', _selectedLang),
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 1.2),
+              ),
+            ),
           ),
-        ),
+          if (_currentPage > 0) ...[
+            const SizedBox(height: 12),
+            TextButton(
+              onPressed: _previousPage,
+              child: Text(
+                Translations.get('back', _selectedLang),
+                style: const TextStyle(color: AppColors.textMuted, fontSize: 14),
+              ),
+            ),
+          ],
+        ],
       ),
     );
   }
