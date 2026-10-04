@@ -56,9 +56,11 @@ This app requires the following Android permissions:
 - `INTERNET`: To send data to your webhook.
 - `RECEIVE_BOOT_COMPLETED`: To restart the service after a phone reboot.
 
+[Beta]
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
-**Disclaimer**: This tool is for personal use and developer testing. Please ensure you comply with your local privacy laws and regulations regarding SMS data.
+**Disclaimer**: This tool is for personal use and developer testing. Please ensure you comply with your local privacy laws and regulations regarding SMS data. 
